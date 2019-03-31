@@ -1,12 +1,11 @@
 import urwid
-import sys
 
-buffer = ""
 
 def exit_on_enter(key):
     if key == 'enter':
         save_text('try.txt', edit.edit_text)
         raise urwid.ExitMainLoop()
+
 
 class TextField(urwid.Filler):
 
@@ -17,7 +16,6 @@ class TextField(urwid.Filler):
         self.original_widget = urwid.Text(
             u"Saved some data: \n %s \n symbols" % len(edit.edit_text)
         )
-        buffer = edit.edit_text
 
 
 def open_text(url):
