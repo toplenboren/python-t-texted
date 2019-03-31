@@ -29,6 +29,7 @@ div = urwid.Divider()
 pile = urwid.Pile([text_helper, div, edit, div, letter_counter])
 top = urwid.Filler(pile, valign='top')
 
+
 def on_editboy_change(edit, new_edit_text):
     letter_counter.set_text(('Symbols: %s' % len(new_edit_text)))
 
