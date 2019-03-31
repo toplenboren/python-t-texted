@@ -1,3 +1,5 @@
+### A FILE THAT WAS CREATED ONLY FOR EDUCATIONAL PURPOSES, DON'T USE IN PRODUCTION ###
+
 import urwid
 
 def show_or_exit(key):
