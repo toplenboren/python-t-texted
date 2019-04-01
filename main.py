@@ -10,7 +10,16 @@ def exit_on_enter(key):
 
 
 def on_edit_change(edit, new_edit_text):
-    letter_counter.set_text(('Symbols: %s' % len(new_edit_text)))
+    
+    
+    #todo make this f more effective, rn it's o^n
+    def get_word_count(text):
+        return len(text.split())
+
+
+    raw_letter_count = len(new_edit_text)
+    letter_counter.set_text(('Symbols: ' + str(raw_letter_count) + 
+                             ' Words: ' + str(get_word_count(new_edit_text))))
 
 
 def open_text(url):
@@ -35,9 +44,9 @@ text_helper = urwid.Text(('banner', u"A simple text editor"), align='center')
 letter_counter = urwid.Text(u'Symbols count:')
 div = urwid.Divider()
 pile = urwid.Pile([text_helper, div, edit, div, letter_counter])
-top = urwid.Filler(pile, valign='top')
+edit_window = urwid.Filler(pile, valign='top')
 
 urwid.connect_signal(edit, 'change', on_edit_change)
 
-loop = urwid.MainLoop( top, PALETTE , unhandled_input=exit_on_enter)
+loop = urwid.MainLoop(edit_window , PALETTE , unhandled_input=exit_on_enter)
 loop.run()
