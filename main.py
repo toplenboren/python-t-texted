@@ -9,7 +9,7 @@ def exit_on_enter(key):
         raise urwid.ExitMainLoop()
 
 
-def on_edit_change(new_edit_text):
+def on_edit_change(edit, new_edit_text):
     letter_counter.set_text(('Symbols: %s' % len(new_edit_text)))
 
 
