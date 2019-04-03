@@ -1,31 +1,18 @@
 import sys
 import urwid
-import re
+import utilitary
 from settings import PALETTE
-
-
-def print_usage():
-    print("Usage: python3 main.py [path to the text file]")
-    print("-h or --help for additional info")
-
-
-def print_light_help():
-    print("light help")
-
-
-def print_full_help():
-    print("full_help")
 
 
 def launch_help():
     if len(sys.argv) == 1:
-        print_usage()
+        utilitary.print_usage()
         return True
     elif sys.argv[1] == '-h':
-        print_light_help()
+        utilitary.print_light_help()
         return True
     elif sys.argv[1] == '--help':
-        print_full_help()
+        utilitary.print_full_help()
         return True
 
 
@@ -87,6 +74,7 @@ def text_editor():
     letter_counter = urwid.Text(u'Symbols count:')
     div = urwid.Divider()
     pile = urwid.Pile([text_helper, div, edit, div, letter_counter])
+
     edit_window = urwid.Filler(pile, valign='top')
 
     urwid.connect_signal(edit, 'change', on_edit_change)
