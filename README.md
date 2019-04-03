@@ -10,4 +10,4 @@ A simple terminal text editor,written during my time at the Uni.
 
 *01.04.19:* _first release_
 
-
+*03.04.19:* _multiline_text_input_ + bugfixes
