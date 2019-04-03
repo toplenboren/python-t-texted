@@ -1,45 +1,7 @@
 import sys
 import urwid
+import re
 from settings import PALETTE
-
-
-def exit_on_enter(key):
-    if key == 'enter':
-        save_text(url, edit.edit_text)
-        raise urwid.ExitMainLoop()
-
-
-def on_edit_change(edit, new_edit_text):
-
-    #todo make this f more effective, rn it's o^n
-    def get_word_count(text):
-        return len(text.split())
-
-
-    raw_letter_count = len(new_edit_text)
-    letter_counter.set_text(('Symbols: ' + str(raw_letter_count) + 
-                             ' Words: ' + str(get_word_count(new_edit_text))))
-
-
-def open_text(url):
-    try:
-        raw = open(url, 'r')
-    except FileNotFoundError:
-        print("ERROR, File was not found")
-        exit(-1)
-    msg = raw.read()
-    raw.close()
-    return msg
-
-
-def save_text(url, text):
-    try:
-        raw = open(url, 'w')
-    except FileNotFoundError:
-        print("ERROR, File was not found")
-        exit(-1)
-    raw.write(text)
-    raw.close()
 
 
 def print_usage():
@@ -67,14 +29,59 @@ def launch_help():
         return True
 
 
-
+def main():
+    if not launch_help():
+        text_editor()
+    else:
+        return
 
 
 def text_editor():
-    url = sys.argv[1]
 
-    edit = urwid.Edit()
-    edit.edit_text = open_text(url)
+    def check_unhandled_input(key):
+        if key == 'shift f5':
+            save_text(text_url, edit.edit_text)
+            raise urwid.ExitMainLoop()
+
+    def on_edit_change(edit, new_edit_text):
+
+        # todo make this f more effective, rn it's o^n
+        def get_word_count(text):
+            return len(text.split())
+
+        def change_letter_counter():
+            raw_letter_count = len(new_edit_text)
+            letter_counter.set_text(('Symbols: ' + str(raw_letter_count) +
+                                     ' Words: ' + str(get_word_count(new_edit_text))))
+
+        change_letter_counter()
+
+    def open_text(text_url):
+        try:
+            raw = open(text_url, 'r')
+        except FileNotFoundError:
+            print("ERROR, File was not found")
+            exit(-1)
+        msg = raw.read()
+        raw.close()
+        return msg
+
+    def save_text(text_text_url, text):
+        try:
+            raw = open(text_text_url, 'w')
+        except FileNotFoundError:
+            print("ERROR, File was not found")
+            exit(-1)
+        raw.write(text)
+        raw.close()
+
+    def get_text_url():
+        return sys.argv[1]
+
+    text_url = get_text_url()
+
+    edit = urwid.Edit(multiline=True)
+    edit.edit_text = open_text(text_url)
 
     text_helper = urwid.Text(('banner', u"A simple text editor"), align='center')
     letter_counter = urwid.Text(u'Symbols count:')
@@ -84,5 +91,9 @@ def text_editor():
 
     urwid.connect_signal(edit, 'change', on_edit_change)
 
-    loop = urwid.MainLoop(edit_window, PALETTE, unhandled_input=exit_on_enter)
+    loop = urwid.MainLoop(edit_window, PALETTE, unhandled_input=check_unhandled_input)
     loop.run()
+
+
+if __name__ == '__main__':
+    main()
