@@ -2,6 +2,7 @@ import sys
 import urwid
 from settings import PALETTE
 
+
 def exit_on_enter(key):
     if key == 'enter':
         save_text(url, edit.edit_text)
@@ -9,8 +10,7 @@ def exit_on_enter(key):
 
 
 def on_edit_change(edit, new_edit_text):
-    
-    
+
     #todo make this f more effective, rn it's o^n
     def get_word_count(text):
         return len(text.split())
@@ -55,13 +55,22 @@ def print_full_help():
     print("full_help")
 
 
-if len(sys.argv) == 1:
-    print_usage()
-elif sys.argv[1] == '-h':
-    print_light_help()
-elif sys.argv[1] == '--help':
-    print_full_help()
-else:
+def launch_help():
+    if len(sys.argv) == 1:
+        print_usage()
+        return True
+    elif sys.argv[1] == '-h':
+        print_light_help()
+        return True
+    elif sys.argv[1] == '--help':
+        print_full_help()
+        return True
+
+
+
+
+
+def text_editor():
     url = sys.argv[1]
 
     edit = urwid.Edit()
@@ -75,5 +84,5 @@ else:
 
     urwid.connect_signal(edit, 'change', on_edit_change)
 
-    loop = urwid.MainLoop(edit_window , PALETTE , unhandled_input=exit_on_enter)
+    loop = urwid.MainLoop(edit_window, PALETTE, unhandled_input=exit_on_enter)
     loop.run()
