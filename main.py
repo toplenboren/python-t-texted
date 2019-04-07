@@ -28,6 +28,8 @@ def text_editor():
         if key == 'shift f5':
             save_text(text_url, edit.edit_text)
             raise urwid.ExitMainLoop()
+        if key == 'shift f8':
+            raise urwid.ExitMainLoop()
 
     def update_letter_counter(edit, new_edit_text):
 

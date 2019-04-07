@@ -5,9 +5,9 @@ def print_usage():
 
 #todo
 def print_light_help():
-    print("Shift + f5 = save file")
+    print("Shift + f5 = save file \n Shift + f8 = exit WO saving")
 
 
 #todo
 def print_full_help():
-    print("full_help")
+    print("Shift + f5 = save file \n Shift + f8 = exit WO saving")
