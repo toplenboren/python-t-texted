@@ -1,4 +1,4 @@
-color_misc = 'dark_blue'
+color_misc = 'dark blue'
 
 def set_palette(color_misc):
     return [('header', 'white', color_misc),

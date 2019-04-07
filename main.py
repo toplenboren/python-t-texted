@@ -4,26 +4,33 @@ import utilitary
 from settings import PALETTE
 
 
-def launch_help():
+def launch_utilitary_function():
     if len(sys.argv) == 1:
         utilitary.print_usage()
-        return True
-    elif sys.argv[1] == '-h':
-        utilitary.print_light_help()
-        return True
-    elif sys.argv[1] == '--help':
-        utilitary.print_full_help()
-        return True
+    else:
+        argument = sys.argv[1]
+
+        if argument == '-h':
+            utilitary.print_light_help()
+            return True
+        elif argument == '--help':
+            utilitary.print_full_help()
+            return True
+        elif argument == '-s':
+            utilitary.setup()
+            return True
+    return False
 
 
 def main():
-    if not launch_help():
+    if not launch_utilitary_function():
         text_editor()
     else:
         return
 
 
 def text_editor():
+
     def check_unhandled_input(key):
         if key == 'shift f5':
             save_text(text_url, edit.edit_text)
@@ -48,18 +55,22 @@ def text_editor():
         try:
             raw = open(text_url, 'r')
         except FileNotFoundError:
-            print("ERROR, File was not found")
-            exit(-1)
+            raw = open(text_url, 'w+')
+
+        #todo refactor
+        try:
+            raw2 = open(text_url, 'w')
+            raw2.close()
+        except PermissionError:
+            print("I wouldn't be able to save your data. Please check permissions.")
+            exit(1)
+
         msg = raw.read()
         raw.close()
         return msg
 
-    def save_text(text_text_url, text):
-        try:
-            raw = open(text_text_url, 'w')
-        except FileNotFoundError:
-            print("ERROR, File was not found")
-            exit(1)
+    def save_text(text_url, text):
+        raw = open(text_url, 'w')
         raw.write(text)
         raw.close()
 
