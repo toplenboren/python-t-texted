@@ -7,12 +7,12 @@ A simple terminal text editor,written during my time at the Uni.
 
 **Install**
 
-`requires urwid for console UI`
 `pip install -r requirements.txt`
 
 **Usage**
 
 `Usage: python main.py [file to edit] or python main.py -s (setup)`
+
 `keys: -h, --help -s (setup)`
 
 **Challengelog:**
@@ -35,14 +35,12 @@ ________________________________________________________________________________
 
 **Установка**
 
-`использую urwid для консольного интерфеса`
 `pip install -r requirements.txt`
 
 **Использование**
 
-`требуется модуль urwid для UI`
-
 `Использование: python main.py [путь к файлу] или python main.py -s (для настройки)`
+
 `поддерживаемые ключи: -h, --help -s (настройки)`
 
 **Путь:**
