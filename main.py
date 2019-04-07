@@ -43,16 +43,19 @@ def text_editor():
 
         change_letter_counter()
 
+	#todo fix
     def open_text(text_url):
         try:
             raw = open(text_url, 'r')
         except FileNotFoundError:
             print("ERROR, File was not found")
+		#better to return smth > 0
             exit(-1)
         msg = raw.read()
         raw.close()
         return msg
-
+	
+	#todo fix
     def save_text(text_text_url, text):
         try:
             raw = open(text_text_url, 'w')
@@ -69,7 +72,8 @@ def text_editor():
 
     edit = urwid.Edit(multiline=True)
     edit.edit_text = open_text(text_url)
-
+	
+	#fix this ('u')
     text_helper = urwid.Text(('banner', u"A simple text editor"), align='center')
     letter_counter = urwid.Text(u'Symbols count:')
     div = urwid.Divider()
