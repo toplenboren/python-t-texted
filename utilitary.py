@@ -23,6 +23,7 @@ def change_theme(color):
     settings.close()
 
 
+# todo release UI version + Fix STAB
 def setup():
     print("Available settings:")
     print("1. theme:")
@@ -39,3 +40,7 @@ def setup():
         except Exception:
             print("Please choose valid settings.")
             exit(2)
+    # STAB
+    else:
+        print("Please choose valid settings.")
+        exit(2)

@@ -30,7 +30,6 @@ def main():
 
 
 def text_editor():
-
     def check_unhandled_input(key):
         if key == 'shift f5':
             save_text(text_url, edit.edit_text)
@@ -57,7 +56,7 @@ def text_editor():
         except FileNotFoundError:
             raw = open(text_url, 'w+')
 
-        #todo refactor
+        # todo refactor
         try:
             raw2 = open(text_url, 'w')
             raw2.close()
@@ -82,19 +81,22 @@ def text_editor():
     edit = urwid.Edit(multiline=True)
     edit.edit_text = open_text(text_url)
 
-    text_helper = urwid.Text(u"A simple text editor", align='center')
-    letter_counter = urwid.Text(u'Symbols count:')
+    text_banner = urwid.Text("A simple text editor", align='center')
+    text_helper = urwid.Text("Shift+f5 -> save, Shift+f8 -> exit")
+    letter_counter = urwid.Text('')
     update_letter_counter(edit, edit.edit_text)
+
+    text_pile = urwid.Pile([letter_counter, text_helper])
 
     urwid.connect_signal(edit, 'change', update_letter_counter)
 
-    text_helper_prep = urwid.AttrMap(text_helper, 'header')
-    edit_prep = urwid.AttrMap(urwid.Filler(edit, valign='top'), 'body')
-    letter_counter_prep = urwid.AttrMap(letter_counter, 'footer')
+    header_prep = urwid.AttrMap(text_banner, 'header')
+    body_prep = urwid.AttrMap(urwid.Filler(edit, valign='top'), 'body')
+    footer_prep = urwid.AttrMap(text_pile, 'footer')
 
-    frame = urwid.Frame(body=edit_prep,
-                        header=text_helper_prep,
-                        footer=letter_counter_prep)
+    frame = urwid.Frame(body=body_prep,
+                        header=header_prep,
+                        footer=footer_prep)
 
     loop = urwid.MainLoop(frame, PALETTE, unhandled_input=check_unhandled_input, handle_mouse=False)
     loop.run()
