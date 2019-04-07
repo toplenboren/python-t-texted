@@ -7,14 +7,14 @@ def print_usage():
 
 #todo
 def print_light_help():
-    print("Shift + f5 = save file \n Shift + f8 = exit WO saving")
+    print("Shift + f5 = save file \nShift + f8 = exit WO saving")
 
 
 #todo
 def print_full_help():
     print("Shift + f5 = save file "
-          "\n Shift + f8 = exit WO saving "
-          "\n Please note, that this program is set up to automatically create files,"
+          "\nShift + f8 = exit WO saving "
+          "\nPlease note, that this program is set up to automatically create files,"
           " if provided text file doesn't exist")
 
 
@@ -24,7 +24,7 @@ def setup():
     setting = input("Please specify a setting you want to change: *1")
 
     if setting == '1':
-        print('Avainable variants: \n 1. Marine (blue) \n 2. Royal Red (red)')
+        print('Available variants: \n1. Marine (blue) \n2. Royal Red (red)')
         user_inp = input("Please specify a value you want to set: *1")
         color_settings = ['dark blue', 'dark_red']
         try:
