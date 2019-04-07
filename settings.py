@@ -1,10 +1,1 @@
-color_misc = 'dark blue'
-
-
-def set_palette(color_misc):
-    return [('header', 'white', color_misc),
-            ('footer', 'white', color_misc),
-            ('body', 'black', 'white')]
-
-
-PALETTE = set_palette(color_misc)
+PALETTE = [('header', 'white', 'dark blue'),('footer', 'white','dark blue'),('body', 'black', 'white')]

@@ -1,16 +1,14 @@
-import settings
-
 def print_usage():
     print("Usage: python3 main.py [path to the text file]")
     print("-h or --help for additional info")
 
 
-#todo
+# todo
 def print_light_help():
     print("Shift + f5 = save file \nShift + f8 = exit WO saving")
 
 
-#todo
+# todo
 def print_full_help():
     print("Shift + f5 = save file "
           "\nShift + f8 = exit WO saving "
@@ -18,17 +16,26 @@ def print_full_help():
           " if provided text file doesn't exist")
 
 
+def change_theme(color):
+    settings = open('settings.py', 'w')
+    template = 'PALETTE = [(\'header\', \'white\', ' + '\'' + color + '\'' + '),(\'footer\', \'white\',' + '\'' + color + '\'' + '),(\'body\', \'black\', \'white\')]'
+    settings.write(template)
+    settings.close()
+
+
 def setup():
-    print("Avainable settings:")
+    print("Available settings:")
     print("1. theme:")
-    setting = input("Please specify a setting you want to change: *1")
+    setting = input("Please specify a setting you want to change: *1 ")
 
     if setting == '1':
         print('Available variants: \n1. Marine (blue) \n2. Royal Red (red)')
-        user_inp = input("Please specify a value you want to set: *1")
-        color_settings = ['dark blue', 'dark_red']
+        user_inp = input("Please specify a value you want to set: *1 ")
+        color_settings = ['dark blue', 'dark red']
         try:
-            settings.color_misc = color_settings[int(user_inp) - 1]
+            color_chosen = color_settings[int(user_inp) - 1]
+            change_theme(color_chosen)
+            print("Success!")
         except Exception:
             print("Please choose valid settings.")
             exit(2)
