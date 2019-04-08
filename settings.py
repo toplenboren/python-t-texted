@@ -1,1 +1,1 @@
-PALETTE = [('header', 'white', 'dark blue'),('footer', 'white','dark blue'),('body', 'black', 'white')]
+PALETTE = [('header', 'white', 'dark red'),('footer', 'white','dark red'),('body', 'black', 'white')]

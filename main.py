@@ -3,10 +3,12 @@ import urwid
 import utilitary
 from settings import PALETTE
 
+buffer = ""
 
 def launch_utilitary_function():
     if len(sys.argv) == 1:
         utilitary.print_usage()
+        return True
     else:
         argument = sys.argv[1]
 
@@ -35,6 +37,7 @@ def text_editor():
             save_text(text_url, edit.edit_text)
             raise urwid.ExitMainLoop()
         if key == 'shift f8':
+            save_text(text_url, buffer)
             raise urwid.ExitMainLoop()
 
     def update_letter_counter(edit, new_edit_text):
@@ -51,10 +54,17 @@ def text_editor():
         change_letter_counter()
 
     def open_text(text_url):
+
+        global buffer
+
         try:
             raw = open(text_url, 'r')
         except FileNotFoundError:
             raw = open(text_url, 'w+')
+
+        msg = raw.read()
+        buffer = msg
+        raw.close()
 
         # todo refactor
         try:
@@ -64,8 +74,6 @@ def text_editor():
             print("I wouldn't be able to save your data. Please check permissions.")
             exit(1)
 
-        msg = raw.read()
-        raw.close()
         return msg
 
     def save_text(text_url, text):
