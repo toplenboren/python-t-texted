@@ -25,7 +25,7 @@ A simple terminal text editor,written during my time at the Uni.
 
 **Documentation**
 
-I use urwid module as the console UI engine. Main.py contain main logic of the program. Settings.py contain PALLETE variable, that stores info about user preferences, such as colors. Utilitary.py contains some utilitary functions. This file was created just to make main.py cleaner. 
+I use urwid module as the console UI engine. Main.py contains main logic of the program. Settings.py contain PALLETE variable, that stores info about user preferences, such as colors. Utilitary.py contains some utilitary functions. This file was created just to make main.py cleaner. 
 
 ________________________________________________________________________________________________________________________________________
 
